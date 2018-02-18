@@ -25,10 +25,16 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]; then # linux
   XZ_FILE=${DIST_FILE}/fibjs.xz
   GZ_FILE=${DIST_FILE}/fibjs.tar.gz
 
-  cp ${FIBJS_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-linux-${TARGET_ARCH}
-  cp ${INSTALLER_FILE} ${TRAVIS_TAG}/installer-${TRAVIS_TAG}-linux-${TARGET_ARCH}.sh
-  cp ${XZ_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-linux-${TARGET_ARCH}.xz
-  cp ${GZ_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-linux-${TARGET_ARCH}.tar.gz
+  if [[ "${TARGET}" == "alpine" ]]; then
+    cp ${FIBJS_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-alpine-${TARGET_ARCH}
+    cp ${XZ_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-alpine-${TARGET_ARCH}.xz
+    cp ${GZ_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-alpine-${TARGET_ARCH}.tar.gz
+  else
+    cp ${FIBJS_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-linux-${TARGET_ARCH}
+    cp ${INSTALLER_FILE} ${TRAVIS_TAG}/installer-${TRAVIS_TAG}-linux-${TARGET_ARCH}.sh
+    cp ${XZ_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-linux-${TARGET_ARCH}.xz
+    cp ${GZ_FILE} ${TRAVIS_TAG}/fibjs-${TRAVIS_TAG}-linux-${TARGET_ARCH}.tar.gz
+  fi
 
 else # darwin
   DIST_FILE=bin/Darwin_${ARCH}_release

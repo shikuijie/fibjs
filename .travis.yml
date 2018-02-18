@@ -4,6 +4,32 @@ services:
   - docker
 matrix:
   include:
+    - os: osx
+      osx_image: xcode9
+      env:
+        - ARCH=amd64
+    - os: osx
+      osx_image: xcode9
+      env:
+        - ARCH=i386
+    - os: linux
+      env:
+        - ARCH=amd64
+    - os: linux
+      env:
+        - ARCH=i386
+    - os: linux
+      env:
+        - ARCH=arm
+    - os: linux
+      env:
+        - ARCH=arm64
+    - os: linux
+      env:
+        - ARCH=mips
+    - os: linux
+      env:
+        - ARCH=mips64
     - os: alpine
       env:
         - TARGET=alpine
@@ -19,10 +45,10 @@ install:
   - git submodule init
   - git submodule update
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    if [[ "${TARGET}" == "alpine" ]]; then
-        docker pull xicilion/fibjs-build-alpine:latest;
+      if [[ "${TARGET}" == "alpine" ]]; then
+        docker pull xicilion/fibjs-build-alpine;
       else
-        docker pull fibjs/build-env:latest;
+        docker pull fibjs/build-env;
       fi
     fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
