@@ -30,6 +30,9 @@ matrix:
     - os: linux
       env:
         - ARCH=mips64
+    - os: alpine
+      env:
+        - ARCH=amd64
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       rvm install ruby-2.4.0;
@@ -42,6 +45,9 @@ install:
   - git submodule update
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       docker pull fibjs/build-env:latest;
+    fi
+  - if [[ "$TRAVIS_OS_NAME" == "alpine" ]]; then
+      docker pull xicilion/fibjs-build-alpine:latest;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew install xz;
