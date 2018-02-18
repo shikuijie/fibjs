@@ -30,7 +30,7 @@ matrix:
     - os: linux
       env:
         - ARCH=mips64
-    - os: alpine
+    - os: linux
       env:
         - TARGET=alpine
         - ARCH=amd64
