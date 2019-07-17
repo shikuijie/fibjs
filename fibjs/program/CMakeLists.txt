@@ -14,6 +14,7 @@ endif(CCACHE_FOUND)
 
 file(GLOB_RECURSE src_list "src/*.c*")
 add_executable(fibjs ${src_list})
+target_link_libraries(fibjs glfw3 "-framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo")
 
 set(BIN_DIR ${PROJECT_SOURCE_DIR}/../../bin/${OS}_${ARCH}_${BUILD_TYPE})
 set(EXECUTABLE_OUTPUT_PATH ${BIN_DIR})

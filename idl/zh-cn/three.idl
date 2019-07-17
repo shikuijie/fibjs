@@ -1,0 +1,4 @@
+module three 
+{
+    static WebGLRenderer;
+};
