@@ -62,6 +62,6 @@
         "xml"
     ],
     "Graphics": [
-        "three"
+        "xtk"
     ]
 }

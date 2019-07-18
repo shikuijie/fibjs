@@ -1,0 +1,4 @@
+interface Face3 : object
+{
+    Face3(Integer i, Integer j, Integer k);
+};

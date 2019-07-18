@@ -406,23 +406,28 @@ function parser_comment(comment) {
 
 module.exports = function (baseFolder, defs) {
   var defs1 = {};
-  var collect = {};
+  var collect = JSON.parse(fs.readTextFile(path.join(baseFolder, 'collect.json')));
 
-  fs.readdir(baseFolder).sort().forEach(f => {
-    if (f === 'collect.json') {
-      f = path.join(baseFolder, f);
-      collect = JSON.parse(fs.readTextFile(f));
-    } else if (path.extname(f) == '.idl') {
-      f = path.join(baseFolder, f);
-      var def = parser.parse(fs.readTextFile(f));
+  function collect_idls(folder) {
+    fs.readdir(folder).sort().forEach(f => {
+      if (f !== 'collect.json') {
+        if (path.extname(f) == '.idl') {
+          f = path.join(folder, f);
+          var def = parser.parse(fs.readTextFile(f));
 
-      def.declare.doc = parser_comment(def.declare.comments);
-      for (var m in def.members)
-        def.members[m].doc = parser_comment(def.members[m].comments);
+          def.declare.doc = parser_comment(def.declare.comments);
+          for (var m in def.members)
+            def.members[m].doc = parser_comment(def.members[m].comments);
 
-      defs1[def.declare.name] = def;
-    }
-  });
+          defs1[def.declare.name] = def;
+        } else {
+          collect_idls(path.join(folder, f));
+        }
+      }
+    });
+  }
+
+  collect_idls(baseFolder);
 
   var defs2 = {};
   for (var g in collect) {

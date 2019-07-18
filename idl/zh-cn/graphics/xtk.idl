@@ -1,0 +1,8 @@
+module xtk
+{
+    static Renderer;
+
+    static Vector3;
+
+    static Face3;
+};

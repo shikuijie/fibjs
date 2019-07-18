@@ -57,7 +57,7 @@ void importModule()
     IMPORT_MODULE(zip);
     IMPORT_MODULE(zlib);
     IMPORT_MODULE(zmq);
-    IMPORT_MODULE(three);
+    IMPORT_MODULE(xtk);
 
 #ifdef _WIN32
     IMPORT_MODULE(gui);

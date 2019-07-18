@@ -1,0 +1,4 @@
+interface Vector3 : object
+{
+    Vector3(Number x, Number y, Number z);
+};

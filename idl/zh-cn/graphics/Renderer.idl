@@ -1,0 +1,10 @@
+interface Renderer : object 
+{
+    Renderer(String title);
+
+    render();
+
+    setClearColor(String color);
+
+    setSize(Integer width, Integer height);
+};
